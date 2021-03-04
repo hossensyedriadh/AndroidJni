@@ -7,10 +7,13 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Load the system library here with the file name containing c source code
     static {
         System.loadLibrary("native");
     }
 
+    //initialize the method from native environment
+    //name should be exactly the same as in the native source
     private native String getURL();
 
     private TextView urlTextView;

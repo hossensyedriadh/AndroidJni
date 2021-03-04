@@ -23,7 +23,7 @@ android {
          *     trying to install the app in phone's running on other ABIs will fail with error: INSTALL_FAILED_NO_MATCHING_ABIs</strong>
          * </p>
          * @link https://developer.android.com/ndk/guides/abis
-        */
+         */
         ndk {
             //excluded x86, x86_64 as these can be easily disassembled
             abiFilters 'arm64-v8a', 'armeabi-v7a'
