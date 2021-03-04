@@ -1,0 +1,1 @@
+APP_ABI := arm64_v8a armeabi-v7a

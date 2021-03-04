@@ -1,0 +1,72 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "io.github.hossensyedriadh.Test"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        /**
+         * <p>
+         *     NDK Application Binary Interface Filters.
+         *     <em>Generally used to make native code (c/cpp) only compilable to processors with mentioned CPU instruction sets</em>
+         *     <strong>The ABIs listed are the only one to be supported in the app,
+         *     trying to install the app in phone's running on other ABIs will fail with error: INSTALL_FAILED_NO_MATCHING_ABIs</strong>
+         * </p>
+         * @link https://developer.android.com/ndk/guides/abis
+        */
+        ndk {
+            //excluded x86, x86_64 as these can be easily disassembled
+            abiFilters 'arm64-v8a', 'armeabi-v7a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            renderscriptOptimLevel 3
+            multiDexEnabled true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dependenciesInfo {
+        includeInApk false
+        includeInBundle false
+    }
+
+    externalNativeBuild {
+        ndkBuild {
+            //provide path of the main "make file" here
+            path 'src/main/jni/Android.mk'
+        }
+    }
+
+    //native development kit version
+    ndkVersion '22.0.7026061'
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
